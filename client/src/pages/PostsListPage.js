@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MicroPostCard } from "../components/MicroPostCard";
-import { LoadingSpinner } from "../components/LoadingSpinner";
+import { LoadingSpinner } from "../components/UI/LoadingSpinner";
 import { ErrorAlert } from "../components/ErrorAlert";
 
 export const PostsListPage = () => {
