@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
 import { PostsListPage } from "./pages/PostsListPage";
 import { PostFormPage } from "./pages/PostFormPage";
@@ -7,15 +7,20 @@ import { AboutUsPage } from "./pages/AboutUsPage";
 import { Navigation } from "./components/Navigation";
 import { SearchBar } from "./components/SearchBar";
 import { SongsList } from "./components/SongsList";
-
 import "./App.css";
 
 export const App = () => {
+  const [songListItems, setSongListItems] = useState([]);
+
+  const getSongList = (songList) => {
+    setSongListItems(songList);
+  };
+
   return (
     <BrowserRouter>
       <Navigation />
-      <SearchBar />
-      <SongsList />
+      <SearchBar getSongList={getSongList} />
+      <SongsList songListItems={songListItems} />
       <div className="container-xl text-center">
         <div className="row justify-content-center">
           <Routes>

@@ -1,8 +1,12 @@
-import React from 'react'
-import classes from "./SongsList.module.css"
+import React from "react";
+import classes from "./SongsList.module.css";
 
-export const SongsList = () => {
+export const SongsList = (props) => {
   return (
-    <div className={classes['songs-list']}>SongsList</div>
-  )
-}
+    <div className={classes["songs-list"]}>
+      <div>
+        <ul className={classes["songs-list-items"]}></ul>
+      </div>
+    </div>
+  );
+};
