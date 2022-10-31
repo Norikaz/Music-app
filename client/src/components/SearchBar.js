@@ -10,16 +10,16 @@ export const SearchBar = () => {
 
   const fetchSong = async (props) => {
     try {
-      isLoading(true);
+      setIsLoading(true);
       const response = await fetch("");
 
       if (!response.ok) throw new Error("Somthing went wrong!");
       const data = response.json();
 
       props.getSongList(data);
-      isLoading(false);
+      setIsLoading(false);
     } catch (error) {
-      isLoading(false);
+      setIsLoading(false);
       setError(error.message);
       console.log(error.message);
     }
