@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import MicroPostCard from "../components/MicroPostCard";
-import LoadingSpinner from "../components/LoadingSpinner";
-import ErrorAlert from "../components/ErrorAlert";
+import { MicroPostCard } from "../components/MicroPostCard";
+import { LoadingSpinner } from "../components/LoadingSpinner";
+import { ErrorAlert } from "../components/ErrorAlert";
 import { useParams } from "react-router-dom";
 
-function ShowPostPage() {
+export const ShowPostPage = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -38,6 +38,4 @@ function ShowPostPage() {
   if (loading) return <LoadingSpinner />;
 
   return <MicroPostCard {...post} />;
-}
-
-export default ShowPostPage;
+};

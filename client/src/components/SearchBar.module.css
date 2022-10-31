@@ -1,0 +1,14 @@
+.form-search {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 90%;
+}
+
+.searchbar {
+  font: inherit;
+  margin-top: 1rem;
+  width: 25rem;
+  max-width: 80%;
+  padding: .4rem;
+  border-radius: .6rem;
+}

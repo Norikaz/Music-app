@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import MicroPostCard from "../components/MicroPostCard";
-import LoadingSpinner from "../components/LoadingSpinner";
-import ErrorAlert from "../components/ErrorAlert";
+import { MicroPostCard } from "../components/MicroPostCard";
+import { LoadingSpinner } from "../components/LoadingSpinner";
+import { ErrorAlert } from "../components/ErrorAlert";
 
-function PostsListPage() {
+export const PostsListPage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -41,6 +41,4 @@ function PostsListPage() {
       </div>
     </div>
   );
-}
-
-export default PostsListPage;
+};

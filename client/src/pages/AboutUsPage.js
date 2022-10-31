@@ -1,6 +1,6 @@
 import React from "react";
 
-function AboutUsPage(props) {
+export const AboutUsPage = (props) => {
   return (
     <>
       <div className="col text-center">
@@ -44,6 +44,4 @@ function AboutUsPage(props) {
       </div>
     </>
   );
-}
-
-export default AboutUsPage;
+};

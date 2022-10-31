@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import ErrorAlert from "../components/ErrorAlert";
+import { ErrorAlert } from "../components/ErrorAlert";
 
-function PostFormPage() {
+export const PostFormPage = () => {
   const [content, setContent] = useState("");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -58,6 +58,4 @@ function PostFormPage() {
       </form>
     </div>
   );
-}
-
-export default PostFormPage;
+};

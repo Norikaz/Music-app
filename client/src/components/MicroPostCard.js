@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function MicroPostCard({ content, createdAt, id }) {
+export const MicroPostCard = ({ content, createdAt, id }) => {
   return (
     <div className="col-10 col-md-8 col-lg-7">
       <div className="card mb-4 shadow">
@@ -12,6 +12,4 @@ function MicroPostCard({ content, createdAt, id }) {
       </div>
     </div>
   );
-}
-
-export default MicroPostCard;
+};

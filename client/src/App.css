@@ -1,1 +1,8 @@
 /* Add custom CSS here */
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+}
+
