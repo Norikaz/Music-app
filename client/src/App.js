@@ -7,7 +7,6 @@ import { AboutUsPage } from "./pages/AboutUsPage";
 import { Navigation } from "./components/Navigation";
 import { SearchBar } from "./components/SearchBar";
 import { SongsList } from "./components/SongsList";
-import "./App.css";
 
 export const App = () => {
   const [songListItems, setSongListItems] = useState([]);
