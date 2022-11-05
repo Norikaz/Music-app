@@ -1,16 +1,15 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import classes from "./Navigation.module.css";
 
 export const Navigation = (props) => {
   return (
-    <nav className={classes["navbar"]}>
+    <nav className="">
       <div className="">
         <Link className="" to="/">
           Music-App
         </Link>
       </div>
-      <ul className={classes["navbar-nav"]}>
+      <ul className="">
         <li className="nav-item">
           <NavLink className="nav-link" to="/posts/new">
             Genres
@@ -22,7 +21,7 @@ export const Navigation = (props) => {
           </NavLink>
         </li>
       </ul>
-      <button className={classes["user-btn"]}>Users</button>
+      <button className="">Users</button>
     </nav>
   );
 };

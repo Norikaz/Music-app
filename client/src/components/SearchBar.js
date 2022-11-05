@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from "react";
-import classes from "./SearchBar.module.css";
 import { LoadingSpinner } from "./UI/LoadingSpinner";
 
 export const SearchBar = () => {
@@ -36,12 +35,12 @@ export const SearchBar = () => {
 
   return (
     <Fragment>
-      <form onSubmit={onSubmitHandler} className={classes["form-search"]}>
+      <form onSubmit={onSubmitHandler} className="">
         <label htmlFor="search-song">
           <h1>Find Your Next Favorite Song</h1>
         </label>
         <input
-          className={classes["searchbar"]}
+          className=""
           type="text"
           placeholder="Search"
           id="search-song"
