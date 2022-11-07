@@ -1,27 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 export const Navigation = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onClickMenuHandler = (event) => {
+    console.log("clicked");
+    setIsOpen((prev) => !prev);
+  };
+
   return (
-    <nav className="">
-      <div className="">
-        <Link className="" to="/">
+    <nav className="bg-gray-300 p-6 md:flex md:items-center md:justify-between font-bold">
+      <div className="flex justify-between items-center">
+        <Link className="text-2xl" to="/">
           Music-App
         </Link>
+        <span className="text-3xl cursor-pointer md:hidden block mx-2">
+          <ion-icon
+            name={isOpen ? "close" : "menu"}
+            onClick={onClickMenuHandler}
+          ></ion-icon>
+        </span>
       </div>
-      <ul className="">
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/posts/new">
-            Genres
+
+      <ul
+        className={`md:container md:flex md:items-center md:gap-8 justify-end z[-1] md:z-auto md:static absolute bg-gray-300 w-full left-0 md:w-auto md:py-0 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500 ${
+          isOpen && `top-[80px] opacity-100`
+        }`}
+      >
+        <li className="my-4 md:my-0">
+          <NavLink className="" to="/posts/new">
+            Home
           </NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/about-us">
-            Artist
+        <li className="my-4 md:my-0 w-20">
+          <NavLink className="" to="/about-us">
+            About us
           </NavLink>
+        </li>
+        <li className="my-4 md:my-0">
+          <NavLink className="" to="/about-us">
+            Contact
+          </NavLink>
+        </li>
+        <li className="bg-blue-300 md:ml-20 p-3 rounded-full inline-block">
+          <button className="">Users</button>
         </li>
       </ul>
-      <button className="">Users</button>
     </nav>
   );
 };
