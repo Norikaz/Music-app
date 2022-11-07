@@ -1,20 +1,29 @@
 import React, { Fragment, useState } from "react";
 import { LoadingSpinner } from "./UI/LoadingSpinner";
 
-export const SearchBar = () => {
+export const SearchBar = (props) => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
   const [songInput, setSongInput] = useState("");
 
-  const fetchSong = async (props) => {
+  const fetchSong = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("");
+      const response = await fetch(
+        "https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=multi&offset=0&limit=10&numberOfTopResults=5",
+        {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Key":
+              "f447e0145dmsh0fb76e5cc0716a2p1115a0jsnf3ba5995621c",
+            "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+          },
+        }
+      );
 
       if (!response.ok) throw new Error("Somthing went wrong!");
-      const data = response.json();
-
+      const data = await response.json();
       props.getSongList(data);
       setIsLoading(false);
     } catch (error) {

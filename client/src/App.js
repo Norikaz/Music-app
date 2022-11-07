@@ -10,28 +10,30 @@ import { SearchBar } from "./components/SearchBar";
 import { SongsList } from "./components/SongsList";
 
 export const App = () => {
-    const [songListItems, setSongListItems] = useState([]);
+  const [songListItems, setSongListItems] = useState([]);
 
-    const getSongList = (songList) => {
-        setSongListItems(songList);
-    };
+  const getSongList = (songList) => {
+    setSongListItems(songList);
+  };
 
-    return (
-        <BrowserRouter>
-            <Navigation />
-            <SearchBar getSongList={getSongList} />
-            <SongsList songListItems={songListItems} />
-            <div className="container-xl text-center">
-                <div className="row justify-content-center">
-                    <Routes>
-                        <Route path="/posts/new" element={<PostFormPage />} />
-                        <Route path="/posts/:id" element={<ShowPostPage />} />
-                        <Route path="/about-us" element={<AboutUsPage />} />
-                        <Route path="/song/" element={<SongPage />} />
-                        <Route path="/" element={<PostsListPage />} />
-                    </Routes>
-                </div>
-            </div>
-        </BrowserRouter>
-    );
+  console.log(songListItems);
+  return (
+    <BrowserRouter>
+      <Navigation />
+      <SearchBar getSongList={getSongList} />
+      <SongsList songListItems={songListItems} />
+
+      <div className="container-xl text-center">
+        <div className="row justify-content-center">
+          <Routes>
+            <Route path="/posts/new" element={<PostFormPage />} />
+            <Route path="/posts/:id" element={<ShowPostPage />} />
+            <Route path="/about-us" element={<AboutUsPage />} />
+            <Route path="/song/" element={<SongPage />} />
+            <Route path="/" element={<PostsListPage />} />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
+  );
 };

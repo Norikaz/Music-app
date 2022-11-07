@@ -5,7 +5,6 @@ export const Navigation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onClickMenuHandler = (event) => {
-    console.log("clicked");
     setIsOpen((prev) => !prev);
   };
 
