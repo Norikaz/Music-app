@@ -72,7 +72,7 @@ export const SongPage = (props) => {
         required
       />
 
-      <div className="bg-gray-500 container mx-auto my-6 rounded-xl">
+      <div className="bg-gray-500 mx-auto my-6 rounded-xl max-w-[95%] w-30">
         <SongInfo
           songName={spotifySongInfo ? spotifySongInfo.name : "N/A"}
           albumName={spotifySongInfo ? spotifySongInfo.album.name : "N/A"}

@@ -43,7 +43,7 @@ export const Navigation = (props) => {
           </NavLink>
         </li>
         <li className="my-4 md:my-0">
-          <NavLink className="" to="/about-us">
+          <NavLink className="" to="/contact">
             Contact
           </NavLink>
         </li>
