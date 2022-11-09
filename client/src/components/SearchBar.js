@@ -49,15 +49,15 @@ export const SearchBar = (props) => {
           <h1 className="text-4xl font-bold">Find Your Next Favorite Song</h1>
         </label>
         <input
-          className="mt-6 p-2 bg-slate-500 rounded-full"
+          className="mt-6 p-2 bg-slate-500 rounded"
           type="text"
           placeholder="Enter Artist, Album, Genre..."
           id="search-song"
           value={songInput}
           onChange={(event) => setSongInput(event.target.value)}
         />
-        {isLoading && <LoadingSpinner />}
       </form>
+      {isLoading && <LoadingSpinner />}
     </Fragment>
   );
 };

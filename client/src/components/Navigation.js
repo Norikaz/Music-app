@@ -28,8 +28,13 @@ export const Navigation = (props) => {
         }`}
       >
         <li className="my-4 md:my-0">
-          <NavLink className="" to="/posts/new">
+          <NavLink to="/">
             Home
+          </NavLink>
+        </li>
+        <li className="my-4 md:my-0">
+          <NavLink className="" to="/posts/new">
+            News
           </NavLink>
         </li>
         <li className="my-4 md:my-0 w-20">
