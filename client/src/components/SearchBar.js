@@ -1,63 +1,85 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { LoadingSpinner } from "./UI/LoadingSpinner";
+import axios from "axios";
 
 export const SearchBar = (props) => {
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isValid, setIsValid] = useState(true);
-  const [songInput, setSongInput] = useState("");
+    const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [isValid, setIsValid] = useState(true);
+    const [songInput, setSongInput] = useState("");
+    // stores 20 results from the API, will use this in the search results page later
+    const [searchResponse, setSearchResponse] = useState(null);
+    //const [spotifyArtistInfo, setSpotifyArtistInfo] = useState(null);
 
-  const fetchSong = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(
-        "https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=multi&offset=0&limit=10&numberOfTopResults=5",
-        {
-          method: "GET",
-          headers: {
-            "X-RapidAPI-Key":
-              "f447e0145dmsh0fb76e5cc0716a2p1115a0jsnf3ba5995621c",
-            "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
-          },
+    //get song through spotify search, default is 20 results
+    //can set custom limit by appending &limit=n to end of query
+    const fetchSong = () => {
+        setIsLoading(true);
+        axios(
+            `https://api.spotify.com/v1/search?q=track:${songInput}&type=track`,
+            {
+                headers: {
+                    Authorization: "Bearer " + props.token,
+                },
+                method: "GET",
+            }
+        )
+            .then((response) => {
+                setSearchResponse(response.data.tracks.items);
+                //sends the first song from response to SearchSongPage
+                //temporary until we have the search results page
+                if (props.parent === "SearchSongPage") {
+                    props.setSongInfo(response.data.tracks.items[0]);
+                }
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                setError(error.message);
+                setIsLoading(false);
+                console.log(error.message);
+            });
+    };
+
+    console.log("SONG INFO");
+    console.log(searchResponse);
+    /*
+    //get artist information by artist id provided by searchResponse
+    useEffect(() => {
+        if (searchResponse) {
+            axios(`https://api.spotify.com/v1/artists/${"query"}`, {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+                method: "GET",
+            }).then((response) => {
+                setSpotifyArtistInfo(response);
+            });
         }
-      );
+    }, []);
+    */
 
-      if (!response.ok) throw new Error("Somthing went wrong!");
-      const data = await response.json();
-      props.getSongList(data);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      setError(error.message);
-      console.log(error.message);
-    }
-  };
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
+        if (songInput.trim().length === 0) {
+            return;
+        }
 
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-    if (songInput.trim().length === 0) {
-      return;
-    }
+        fetchSong();
+    };
 
-    fetchSong();
-  };
-
-  return (
-    <Fragment>
-      <form onSubmit={onSubmitHandler} className="text-center mt-12">
-        <label htmlFor="search-song">
-          <h1 className="text-4xl font-bold">Find Your Next Favorite Song</h1>
-        </label>
-        <input
-          className="mt-6 p-2 bg-slate-500 rounded"
-          type="text"
-          placeholder="Enter Artist, Album, Genre..."
-          id="search-song"
-          value={songInput}
-          onChange={(event) => setSongInput(event.target.value)}
-        />
-      </form>
-      {isLoading && <LoadingSpinner />}
-    </Fragment>
-  );
+    return (
+        <Fragment>
+            <form onSubmit={onSubmitHandler} className="text-center mt-12">
+                <input
+                    className="mt-6 p-2 bg-slate-500 rounded"
+                    type="text"
+                    placeholder="Enter Artist, Album, Genre..."
+                    id="search-song"
+                    value={songInput}
+                    onChange={(event) => setSongInput(event.target.value)}
+                />
+            </form>
+            {isLoading && <LoadingSpinner />}
+        </Fragment>
+    );
 };
