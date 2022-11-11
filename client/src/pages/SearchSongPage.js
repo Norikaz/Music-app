@@ -28,7 +28,11 @@ export const SongPage = (props) => {
 
     return (
         <div className="text-center mt-12">
-            <SearchBar parent={"SearchSongPage"} setSongInfo={setSongInfo} />
+            <SearchBar
+                parent={"SearchSongPage"}
+                setSongInfo={setSongInfo}
+                token={props.token}
+            />
             <div className="bg-gray-500 mx-auto my-6 rounded-xl max-w-[95%] w-30">
                 <SongInfo
                     songName={songInfo ? songInfo.name : "N/A"}
