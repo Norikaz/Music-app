@@ -5,6 +5,7 @@ export const Layout = (props) => {
   return (
     <Fragment>
       <Navigation />
+      
       <main>
         {props.children}
       </main>
