@@ -58,7 +58,7 @@ export const SearchBar = (props) => {
     }, []);
     */
 
-  const onSubmitHandler = (event) => {
+  const submitHandler = (event) => {
     event.preventDefault();
     if (songInput.trim().length === 0) {
       return;
@@ -69,17 +69,7 @@ export const SearchBar = (props) => {
 
   return (
     <Fragment>
-      {/* <form onSubmit={onSubmitHandler} className="text-center mt-12">
-                <input
-                    className="mt-6 p-2 bg-slate-500 rounded"
-                    type="text"
-                    placeholder="Enter Artist, Album, Genre..."
-                    id="search-song"
-                    value={songInput}
-                    onChange={(event) => setSongInput(event.target.value)}
-                />
-            </form> */}
-      <form className="container mx-auto relative">
+      <form onSubmit={submitHandler} className="container mx-auto relative">
         <div className="flex">
           <label
             htmlFor="search-dropdown"

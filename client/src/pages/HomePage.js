@@ -6,10 +6,9 @@ import { SearchBar } from "../components/SearchBar";
 export const HomePage = (props) => {
     return (
         <div>
-            <h1 className="text-4xl font-bold mb-6">
+            <h1 className="text-4xl font-bold mb-6 my-6 text-center">
                 Find Your Next Favorite Song!
             </h1>
-            <SearchBar token={props.token} />
         </div>
     );
 };
