@@ -16,6 +16,7 @@ export const SongInfo = (props) => {
           <img src={props.artistImage} alt="artist image" />
           <p>Artist(s): {props.artistName}</p>
           <p>Genres: {props.genres}</p>
+          <iframe src={props.id} width="20%" height="152"></iframe>
       </div>
   );
 };
