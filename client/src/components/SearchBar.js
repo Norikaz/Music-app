@@ -1,11 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { LoadingSpinner } from "./UI/LoadingSpinner";
+
 import axios from "axios";
 
 export const SearchBar = (props) => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
+  const [dropDownClicked, setDropDownClicked] = useState(false);
+
   const [songInput, setSongInput] = useState("");
   // stores 20 results from the API, will use this in the search results page later
   const [searchResponse, setSearchResponse] = useState(null);
@@ -76,7 +79,7 @@ export const SearchBar = (props) => {
                     onChange={(event) => setSongInput(event.target.value)}
                 />
             </form> */}
-      <form>
+      <form className="container mx-auto relative">
         <div className="flex">
           <label
             htmlFor="search-dropdown"
@@ -89,6 +92,7 @@ export const SearchBar = (props) => {
             data-dropdown-toggle="dropdown"
             className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
             type="button"
+            onClick={() => setDropDownClicked((prev) => !prev)}
           >
             All categories{" "}
             <svg
@@ -107,16 +111,12 @@ export const SearchBar = (props) => {
           </button>
           <div
             id="dropdown"
-            className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700"
+            className={`${
+              dropDownClicked ? "" : "hidden"
+            } z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 absolute top-11`}
             data-popper-reference-hidden=""
             data-popper-escaped=""
             data-popper-placement="top"
-            style={{
-              position: "absolute",
-              inset: "auto auto 0px 0px",
-              margin: "0px",
-              transform: "translate3d(897px, 5637px, 0px)",
-            }}
           >
             <ul
               className="py-1 text-sm text-gray-700 dark:text-gray-200"
@@ -127,7 +127,7 @@ export const SearchBar = (props) => {
                   type="button"
                   className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
-                  Mockups
+                  Song
                 </button>
               </li>
               <li>
@@ -135,7 +135,7 @@ export const SearchBar = (props) => {
                   type="button"
                   className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
-                  Templates
+                  Artist
                 </button>
               </li>
               <li>
@@ -143,7 +143,7 @@ export const SearchBar = (props) => {
                   type="button"
                   className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
-                  Design
+                  Album
                 </button>
               </li>
               <li>
@@ -151,7 +151,7 @@ export const SearchBar = (props) => {
                   type="button"
                   className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
-                  Logos
+                  Genre
                 </button>
               </li>
             </ul>
@@ -161,7 +161,9 @@ export const SearchBar = (props) => {
               type="search"
               id="search-dropdown"
               className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-              placeholder="Search Mockups, Logos, Design Templates..."
+              placeholder="Search Songs, Albums, Artist..."
+              value={songInput}
+              onChange={(event) => setSongInput(event.target.value)}
               required
             />
             <button
