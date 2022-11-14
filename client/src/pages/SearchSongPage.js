@@ -33,7 +33,7 @@ export const SongPage = (props) => {
                 setSongInfo={setSongInfo}
                 token={props.token}
             />
-            <div className="bg-gray-500 mx-auto my-6 rounded-xl max-w-[95%] w-30">
+            <div>
                 <SongInfo
                     songName={songInfo ? songInfo.name : "N/A"}
                     albumName={songInfo ? songInfo.album.name : "N/A"}
