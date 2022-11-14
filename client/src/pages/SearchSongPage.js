@@ -48,7 +48,7 @@ export const SongPage = (props) => {
                             ? songInfo.artists.map((artist) => (
                                   <p>{artist.name}</p>
                               ))
-                            : "N/A"
+                            : ["N/A"]
                     }
                     artistImage={
                         artistInfo
