@@ -54,6 +54,7 @@ export const SongPage = (props) => {
                             ? artistInfo.genres.map((genre) => <p>{genre}</p>)
                             : "N/A"
                     }
+                    id = {songInfo ? "https://open.spotify.com/embed/track/"+songInfo.id : ""}
                 />
             </div>
         </div>
