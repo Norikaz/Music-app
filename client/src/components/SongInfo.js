@@ -5,9 +5,7 @@ import { Card } from "./UI/Card";
 export const SongInfo = (props) => {
   return (
       <div className="bg-gray-100 mx-auto my-6 rounded-xl max-w-[95%] w-30 p-16 font-inter">
-          <h1 className="font-semibold text-4xl outline-dotted text-left">
-              {props.songName}
-          </h1>
+          <h1 className="font-semibold text-4xl text-left">{props.songName}</h1>
 
           <img
               src={props.albumCover}
@@ -16,6 +14,8 @@ export const SongInfo = (props) => {
               height="auto"
               className="align-center mt-8 mb-8 mr-8 rounded-xl"
           />
+
+          <iframe src={props.id} width="auto" height="152"></iframe>
 
           <div className="bg-gray-200 pr-8 mb-8 mr-8 outline-5 inline-flex rounded-xl items-center">
               <img
@@ -41,19 +41,15 @@ export const SongInfo = (props) => {
                   className="rounded-xl mr-4 aspect-square"
               />
 
-              <div className="text-left outline-dotted my-4 text-l">
+              <div className="text-left my-4 text-l">
                   <span className="font-semibold text-2xl">
                       {props.albumName}
                   </span>
-                  <p className="outline-dotted">{props.releaseDate}</p>
+                  <p>{props.releaseDate}</p>
               </div>
           </div>
 
           <p className="outline-dotted">Genres: {props.genres}</p>
-          <img src={props.artistImage} alt="artist image" />
-          <p>Artist(s): {props.artistName}</p>
-          <p>Genres: {props.genres}</p>
-          <iframe src={props.id} width="20%" height="152"></iframe>
       </div>
   );
 };

@@ -39,7 +39,9 @@ export const SongPage = (props) => {
                     albumName={songInfo ? songInfo.album.name : "N/A"}
                     releaseDate={songInfo ? songInfo.album.release_date : "N/A"}
                     albumCover={
-                        songInfo ? `${songInfo.album.images[1].url}` : ""
+                        songInfo
+                            ? `${songInfo.album.images[1].url}`
+                            : "https://via.placeholder.com/150?text=No+Image"
                     }
                     artistName={
                         songInfo
@@ -48,13 +50,22 @@ export const SongPage = (props) => {
                               ))
                             : "N/A"
                     }
-                    artistImage={artistInfo ? artistInfo.images[2].url : ""}
+                    artistImage={
+                        artistInfo
+                            ? artistInfo.images[2].url
+                            : "https://via.placeholder.com/150?text=No+Image"
+                    }
                     genres={
                         artistInfo
                             ? artistInfo.genres.map((genre) => <p>{genre}</p>)
                             : "N/A"
                     }
-                    id = {songInfo ? "https://open.spotify.com/embed/track/"+songInfo.id : ""}
+                    id={
+                        songInfo
+                            ? "https://open.spotify.com/embed/track/" +
+                              songInfo.id
+                            : ""
+                    }
                 />
             </div>
         </div>
