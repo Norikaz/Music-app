@@ -6,25 +6,22 @@ import axios from "axios";
 //this will be the song page that will display information about each song
 //https://www.figma.com/file/0BuMDTJLOjiYCjR997Lrif/muschart?node-id=34%3A230
 export const SongPage = (props) => {
-    const [songInfo, setSongInfo] = useState(null);
-    const [artistInfo, setArtistInfo] = useState(null);
+  const [songInfo, setSongInfo] = useState(null);
+  const [artistInfo, setArtistInfo] = useState(null);
 
-    //get artist information by artist id
-    useEffect(() => {
-        if (songInfo) {
-            axios(
-                `https://api.spotify.com/v1/artists/${songInfo.artists[0].id}`,
-                {
-                    headers: {
-                        Authorization: "Bearer " + props.token,
-                    },
-                    method: "GET",
-                }
-            ).then((response) => {
-                setArtistInfo(response.data);
-            });
-        }
-    }, [songInfo]);
+  //get artist information by artist id
+  useEffect(() => {
+    if (songInfo) {
+      axios(`https://api.spotify.com/v1/artists/${songInfo.artists[0].id}`, {
+        headers: {
+          Authorization: "Bearer " + props.token,
+        },
+        method: "GET",
+      }).then((response) => {
+        setArtistInfo(response.data);
+      });
+    }
+  }, [songInfo]);
 
     return (
         <div className="text-center mt-12">
