@@ -10,8 +10,10 @@ module.exports = {
   plugins: [require("flowbite/plugin")],
 };
 
+
+
 // flowbite
 // content: "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}"
 // plugin require("flowbite/plugin")
 
-// flowbite components werent working
+// flowbite components are not working

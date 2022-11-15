@@ -9,7 +9,7 @@ export const SearchBar = (props) => {
   const [isValid, setIsValid] = useState(true);
   const [dropDownClicked, setDropDownClicked] = useState(false);
 
-  const [songInput, setSongInput] = useState("");
+  const [userInput, setUserInput] = useState("");
   // stores 20 results from the API, will use this in the search results page later
   const [searchResponse, setSearchResponse] = useState(null);
   //const [spotifyArtistInfo, setSpotifyArtistInfo] = useState(null);
@@ -18,7 +18,7 @@ export const SearchBar = (props) => {
   //can set custom limit by appending &limit=n to end of query
   const fetchSong = () => {
     setIsLoading(true);
-    axios(`https://api.spotify.com/v1/search?q=track:${songInput}&type=track`, {
+    axios(`https://api.spotify.com/v1/search?q=track:${userInput}&type=track`, {
       headers: {
         Authorization: "Bearer " + props.token,
       },
@@ -29,7 +29,7 @@ export const SearchBar = (props) => {
         //sends the first song from response to SearchSongPage
         //temporary until we have the search results page
         if (props.parent === "SearchSongPage") {
-          props.setSongInfo(response.data.tracks.items[0]);
+          props.setApiData(response.data.tracks.items[0]);
         }
         setIsLoading(false);
       })
@@ -40,31 +40,30 @@ export const SearchBar = (props) => {
       });
   };
 
-  console.log("SONG INFO");
-  console.log(searchResponse);
   /*
-    //get artist information by artist id provided by searchResponse
-    useEffect(() => {
-        if (searchResponse) {
+  //get artist information by artist id provided by searchResponse
+  useEffect(() => {
+    if (searchResponse) {
             axios(`https://api.spotify.com/v1/artists/${"query"}`, {
                 headers: {
-                    Authorization: "Bearer " + token,
+                  Authorization: "Bearer " + token,
                 },
                 method: "GET",
-            }).then((response) => {
+              }).then((response) => {
                 setSpotifyArtistInfo(response);
-            });
-        }
-    }, []);
-    */
+              });
+            }
+          }, []);
+          */
 
   const submitHandler = (event) => {
     event.preventDefault();
-    if (songInput.trim().length === 0) {
+    if (userInput.trim().length === 0) {
       return;
     }
-
     fetchSong();
+    console.log("SONG INFO");
+    console.log(searchResponse);
   };
 
   return (
@@ -152,8 +151,8 @@ export const SearchBar = (props) => {
               id="search-dropdown"
               className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
               placeholder="Search Songs, Albums, Artist..."
-              value={songInput}
-              onChange={(event) => setSongInput(event.target.value)}
+              value={userInput}
+              onChange={(event) => setUserInput(event.target.value)}
               required
             />
             <button
