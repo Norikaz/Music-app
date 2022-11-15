@@ -31,7 +31,16 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'user'
     })
 
-    
+    User.associate = (models) => {
+        //associations can be defined here 
+    };
+
+    // function will check if user provided password then hash it using bcrypt library and store that hash in passwordHash
+    User.beforeSave((user,options) => {
+        if(user.password) { 
+            user.passwordHash = bcrypt.hashSync(user.password, 10);
+        }
+    });
 
 
     return User; 
