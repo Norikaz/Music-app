@@ -23,32 +23,48 @@ export const SongPage = (props) => {
     }
   }, [songInfo]);
 
-  return (
-    <div className="text-center mt-12">
-      <SearchBar
-        parent={"SearchSongPage"}
-        setSongInfo={setSongInfo}
-        token={props.token}
-      />
-      <div className="bg-gray-500 mx-auto my-6 rounded-xl max-w-[95%] w-30">
-        <SongInfo
-          songName={songInfo ? songInfo.name : "N/A"}
-          albumName={songInfo ? songInfo.album.name : "N/A"}
-          releaseDate={songInfo ? songInfo.album.release_date : "N/A"}
-          albumCover={songInfo ? `${songInfo.album.images[1].url}` : ""}
-          artistName={
-            songInfo
-              ? songInfo.artists.map((artist) => <p>{artist.name}</p>)
-              : "N/A"
-          }
-          artistImage={artistInfo ? artistInfo.images[2].url : ""}
-          genres={
-            artistInfo
-              ? artistInfo.genres.map((genre) => <p>{genre}</p>)
-              : "N/A"
-          }
-        />
-      </div>
-    </div>
-  );
+    return (
+        <div className="text-center mt-12">
+            <SearchBar
+                parent={"SearchSongPage"}
+                setSongInfo={setSongInfo}
+                token={props.token}
+            />
+            <div>
+                <SongInfo
+                    songName={songInfo ? songInfo.name : "N/A"}
+                    albumName={songInfo ? songInfo.album.name : "N/A"}
+                    releaseDate={songInfo ? songInfo.album.release_date : "N/A"}
+                    albumCover={
+                        songInfo
+                            ? `${songInfo.album.images[1].url}`
+                            : "https://via.placeholder.com/150?text=No+Image"
+                    }
+                    artistName={
+                        songInfo
+                            ? songInfo.artists.map((artist) => (
+                                  <p>{artist.name}</p>
+                              ))
+                            : ["N/A"]
+                    }
+                    artistImage={
+                        artistInfo
+                            ? artistInfo.images[2].url
+                            : "https://via.placeholder.com/150?text=No+Image"
+                    }
+                    genres={
+                        artistInfo
+                            ? artistInfo.genres.map((genre) => <p>{genre}</p>)
+                            : "N/A"
+                    }
+                    id={
+                        songInfo
+                            ? "https://open.spotify.com/embed/track/" +
+                              songInfo.id
+                            : ""
+                    }
+                />
+            </div>
+        </div>
+    );
 };
