@@ -44,7 +44,7 @@ export const Top10List = (props) => {
 
 
   return (
-      <div className="bg-gray-300 mx-auto my-6 rounded-xl max-w-[95%] w-30 p-16 font-inter">
+      <div className="bg-gray-200 mx-auto my-6 rounded-xl max-w-[95%] w-30 p-16 font-inter">
         {/* creates the scrollable effect */}
         <div className="flex snap-x overflow-auto">
           {cardArr}
