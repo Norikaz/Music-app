@@ -27,31 +27,18 @@ export const SongPage = (props) => {
     <div className="text-center mt-12">
       <SearchBar
         parent={"SearchSongPage"}
-        setApiData={setApiData}
+        setSongInfo={setSongInfo}
         token={props.token}
       />
       <div className="bg-gray-500 mx-auto my-6 rounded-xl max-w-[95%] w-30">
-        {/* {apiData &&
-          apiData.map((data) => (
-            <SongInfo
-              songName={data.name}
-              albumName={data.album.name}
-              releaseDate={data.album.release_date}
-              albumCover={data.album.images[1].url}
-              artistName={artist.name}
-              artistImage={data.images[2].url}
-              genre={data.genre}
-            />
-          ))} */}
-
         <SongInfo
-          songName={apiData ? apiData.name : "N/A"}
-          albumName={apiData ? apiData.album.name : "N/A"}
-          releaseDate={apiData ? apiData.album.release_date : "N/A"}
-          albumCover={apiData ? `${apiData.album.images[1].url}` : ""}
+          songName={songInfo ? songInfo.name : "N/A"}
+          albumName={songInfo ? songInfo.album.name : "N/A"}
+          releaseDate={songInfo ? songInfo.album.release_date : "N/A"}
+          albumCover={songInfo ? `${songInfo.album.images[1].url}` : ""}
           artistName={
-            apiData
-              ? apiData.artists.map((artist) => <p>{artist.name}</p>)
+            songInfo
+              ? songInfo.artists.map((artist) => <p>{artist.name}</p>)
               : "N/A"
           }
           artistImage={artistInfo ? artistInfo.images[2].url : ""}
