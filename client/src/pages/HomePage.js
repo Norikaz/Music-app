@@ -15,7 +15,7 @@ export const HomePage = (props) => {
             <h1 className="text-4xl font-bold mb-6 my-6 text-center">
                 Find Your Next Favorite Song!
             </h1>
-            <Top10List token={props.token}/>
+            <Top10List />
         </div>
     );
 };
