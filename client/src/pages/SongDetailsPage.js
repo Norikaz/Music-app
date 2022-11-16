@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SongInfo } from "../components/SongInfo";
 import { SearchBar } from "../components/SearchBar";
 import { TokenContext } from "../components/context/TokenContext";
@@ -14,16 +14,6 @@ export const SongPage = (props) => {
     const token = useContext(TokenContext);
     const { songInfo, setSongInfo } = useContext(SongInfoContext);
     //get artist information by artist id provided by songInfo
-
-    /*const { isLoading, isError, data } = useMemo(
-        useAxiosFetchSpotify(
-            `https://api.spotify.com/v1/artists/${songInfo.artists[0].id}`,
-            token
-        ),
-        [songInfo]
-    );
-
-    setArtistInfo(data);*/
 
     useEffect(() => {
         if (songInfo) {

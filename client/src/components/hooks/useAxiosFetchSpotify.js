@@ -45,4 +45,6 @@ export default function useAxiosFetchSpotify(url, token) {
                 dispatch({ type: "ERROR" });
             });
     }, [url]);
+
+    return state;
 }
