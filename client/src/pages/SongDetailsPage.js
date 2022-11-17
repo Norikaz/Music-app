@@ -4,7 +4,6 @@ import { SearchBar } from "../components/SearchBar";
 import { TokenContext } from "../components/context/TokenContext";
 import { SongInfoContext } from "../components/context/SongInfoContext";
 import useAxiosFetchSpotify from "../components/hooks/useAxiosFetchSpotify";
-import axios from "axios";
 
 //this will be the song page that will display information about each song
 //https://www.figma.com/file/0BuMDTJLOjiYCjR997Lrif/muschart?node-id=34%3A230
@@ -13,23 +12,24 @@ export const SongPage = (props) => {
 
     const token = useContext(TokenContext);
     const { songInfo, setSongInfo } = useContext(SongInfoContext);
+
     //get artist information by artist id provided by songInfo
+    const { isLoading, isError, data } = useAxiosFetchSpotify(
+        () => {
+            if (songInfo)
+                return `https://api.spotify.com/v1/artists/${songInfo.artists[0].id}`;
+        },
+        token,
+        [songInfo]
+    );
+
+    console.log("isLoading: " + isLoading);
+    console.log("isError: " + isError);
+    console.log("data: " + data);
 
     useEffect(() => {
-        if (songInfo) {
-            axios(
-                `https://api.spotify.com/v1/artists/${songInfo.artists[0].id}`,
-                {
-                    headers: {
-                        Authorization: "Bearer " + token,
-                    },
-                    method: "GET",
-                }
-            ).then((response) => {
-                setArtistInfo(response.data);
-            });
-        }
-    }, [songInfo]);
+        setArtistInfo(data);
+    }, [data]);
 
     return (
         <div className="text-center mt-12">

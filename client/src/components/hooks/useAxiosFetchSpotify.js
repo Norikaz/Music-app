@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import axios from "axios";
 
-export default function useAxiosFetchSpotify(url, token) {
+export default function useAxiosFetchSpotify(urlCallback, token, dep) {
     const [state, dispatch] = useReducer(
         (state, action) => {
             switch (action.type) {
@@ -26,13 +26,16 @@ export default function useAxiosFetchSpotify(url, token) {
     );
 
     useEffect(() => {
+        let url = urlCallback instanceof Function ? urlCallback() : urlCallback;
+
         if (!url) {
+            console.log("Empty URL");
             return;
         }
 
         dispatch({ type: "INIT" });
 
-        axios(`url`, {
+        axios(url, {
             headers: {
                 Authorization: "Bearer " + token,
             },
@@ -41,10 +44,11 @@ export default function useAxiosFetchSpotify(url, token) {
             .then((response) => {
                 dispatch({ type: "SUCCESS", payload: response.data });
             })
-            .catch(() => {
+            .catch((e) => {
+                console.log("Error: " + e.message);
                 dispatch({ type: "ERROR" });
             });
-    }, [url]);
+    }, [...dep]);
 
     return state;
 }
