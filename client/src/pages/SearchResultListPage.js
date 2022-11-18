@@ -7,7 +7,7 @@ import { SearchBar } from "../components/SearchBar";
 export const SearchResultsPage = (props) => {
     return (
         <div>
-            <SearchBar token={props.token} />
+            <SearchBar />
         </div>
     );
 };
