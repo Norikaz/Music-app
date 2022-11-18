@@ -1,6 +1,14 @@
 import { useEffect, useReducer } from "react";
 import axios from "axios";
 
+/**
+ * Fetches data from Spotify using the provided API link
+ * @param {function or string} urlCallback A url or a function that returns a url that is used for the fetch request
+ * @param {string} token The token used to authenticate the request for the Spotify API
+ * @param {array} dep array of dependencies that will trigger the fetch request
+ * @return {object} An object containing the data, isLoading, and isError values
+ */
+
 export default function useAxiosFetchSpotify(urlCallback, token, dep) {
     const [state, dispatch] = useReducer(
         (state, action) => {
