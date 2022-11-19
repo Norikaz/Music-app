@@ -54,7 +54,7 @@ export const SongPage = (props) => {
                     }
                     genres={
                         artistInfo
-                            ? artistInfo.genres.map((genre) => <p>{genre}</p>)
+                            ? artistInfo.genres.map((genre) => <p>{genre}, </p>)
                             : "N/A"
                     }
                     id={

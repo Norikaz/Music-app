@@ -51,14 +51,23 @@ export const SongInfo = (props) => {
                       />
                   </div>
               </div>
+              <div className="bg-gray-200 outline outline-2 outline-gray-300 rounded-xl p-5 ml-8 inline-flex items-center">
+                  <div className="text-left my-4 text-2xl font-semibold outline-dotted">
+                      Genres:{" "}
+                  </div>
+                  <br />
+                  <div className="my-4 text-l outline-dotted">
+                      {props.genres}
+                  </div>
+              </div>
           </div>
+
           <iframe
               src={props.id}
               width="auto"
               height="152"
               className="mt-8"
           ></iframe>
-          <p className="">Genres: {props.genres}</p>
       </div>
   );
 };
