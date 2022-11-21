@@ -6,6 +6,7 @@ import { SongInfoContext } from "../components/context/SongInfoContext";
 import useAxiosFetchSpotify from "../components/hooks/useAxiosFetchSpotify";
 
 //this will be the song page that will display information about each song
+//users will be sent to this page whenever they click on a song on the home page or the search results page
 //https://www.figma.com/file/0BuMDTJLOjiYCjR997Lrif/muschart?node-id=34%3A230
 export const SongPage = (props) => {
   const [artistInfo, setArtistInfo] = useState(null);
@@ -28,10 +29,12 @@ export const SongPage = (props) => {
 
   useEffect(() => {
     setArtistInfo(data);
+    console.log(data);
   }, [data]);
 
   return (
     <div className="text-center mt-12">
+      {/*This search bar is temporary until the search results page is ready*/}
       <SearchBar />
       <div>
         <SongInfo
@@ -55,7 +58,7 @@ export const SongPage = (props) => {
               : "https://via.placeholder.com/150?text=No+Image"
           }
           genres={
-            artistInfo
+            artistInfo && artistInfo.genres.length > 0
               ? artistInfo.genres.map(
                   (genre, i) =>
                     genre.charAt(0).toUpperCase() +
