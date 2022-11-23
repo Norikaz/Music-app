@@ -41,7 +41,7 @@ export const SongPage = (props) => {
           songName={songInfo ? songInfo.name : "N/A"}
           albumName={songInfo ? songInfo.album.name : "N/A"}
           releaseDate={songInfo ? songInfo.album.release_date : "N/A"}
-          popularity={songInfo ? songInfo.popularity : "N/A"}
+          relevance={songInfo ? songInfo.popularity / 10 : "N/A"}
           albumCover={
             songInfo
               ? `${songInfo.album.images[1].url}`
