@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 // Load each controller
-const microPostsController = require("./microPosts.js");
+const microPostsController = require('./microPosts.js');
 const authController = require('./auth.js');
 
 // Mount each controller under a specific route. These
