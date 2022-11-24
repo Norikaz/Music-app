@@ -37,8 +37,8 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/logout', (req, res, next) => {
-    req.logout( function (err){
-        if (err) return next(err);
+    req.logout(req.user, err => {
+        if(err) return next(err);
     });
     res.status(200).json({ message: 'logout successful' });
 });
