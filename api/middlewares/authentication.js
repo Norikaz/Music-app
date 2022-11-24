@@ -62,4 +62,9 @@ passport.deserializeUser((id, done) => {
 });
 
 
+//makes posts only avaliable to users, sends 401 error if not signed in
+passport.isAuthenticated = () => 
+(req, res, next) => (req.user ? next() : res.sendStatus(401));
+
+
 module.exports = passport;
