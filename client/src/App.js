@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { Routes, Route, Router } from "react-router-dom";
 import { PostsListPage } from "./pages/PostsListPage";
 import { PostFormPage } from "./pages/PostFormPage";
 import { ShowPostPage } from "./pages/ShowPostPage";
 import { AboutUsPage } from "./pages/AboutUsPage";
-import { SongPage } from "./pages/SearchSongPage";
+import { SongPage } from "./pages/SongDetailsPage";
 import { ContactPage } from "./pages/ContactPage";
 import { Layout } from "./components/layout/Layout";
 import { HomePage } from "./pages/HomePage";
-import { SearchResultsPage } from "./pages/SearchResultsPage";
+import { SearchResultsPage } from "./pages/SearchResultListPage";
+import { TokenContext } from "./components/context/TokenContext";
+import { SongInfoContext } from "./components/context/SongInfoContext";
+import { SearchResultsContext } from "./components/context/SearchResultsContext";
 import axios from "axios";
 
 //get id and secret from https://developer.spotify.com/dashboard
@@ -18,6 +21,17 @@ const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
 export const App = () => {
     const [token, setToken] = useState("");
+    const [searchResults, setSearchResults] = useState(null);
+    const [songInfo, setSongInfo] = useState(null);
+
+    const songInfoProvider = useMemo(
+        () => ({ songInfo, setSongInfo }),
+        [songInfo, setSongInfo]
+    );
+    const searchResultsProvider = useMemo(
+        () => ({ searchResults, setSearchResults }),
+        [searchResults, setSearchResults]
+    );
 
     //get spotify token
     useEffect(() => {
@@ -36,18 +50,36 @@ export const App = () => {
 
     return (
         <Layout>
-            <Routes>
-                <Route path="/posts/new" element={<PostFormPage />} />
-                <Route path="/posts/:id" element={<ShowPostPage />} />
-                <Route path="/songs" element={<SongPage token={token} />} />
-                <Route path="/" element={<HomePage token={token} />} />
-                <Route
-                    path="/search"
-                    element={<SearchResultsPage token={token} />}
-                />
-                <Route path="/about-us" element={<AboutUsPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-            </Routes>
+            <SongInfoContext.Provider value={songInfoProvider}>
+                <SearchResultsContext.Provider value={searchResultsProvider}>
+                    <TokenContext.Provider value={token}>
+                        <Routes>
+                            {/* displays a search bar and a carousel of 10 songs*/}
+                            <Route path="/" element={<HomePage />} />
+                            {/*displays the info and reviews on individual songs*/}
+                            <Route
+                                path="/song-details"
+                                element={<SongPage />}
+                            />
+                            {/* search results will be displayed as a list on this page */}
+                            <Route
+                                path="/search-song"
+                                element={<SearchResultsPage />}
+                            />
+                            <Route
+                                path="/posts/new"
+                                element={<PostFormPage />}
+                            />
+                            <Route
+                                path="/posts/:id"
+                                element={<ShowPostPage />}
+                            />
+                            <Route path="/about-us" element={<AboutUsPage />} />
+                            <Route path="/contact" element={<ContactPage />} />
+                        </Routes>
+                    </TokenContext.Provider>
+                </SearchResultsContext.Provider>
+            </SongInfoContext.Provider>
         </Layout>
     );
 };

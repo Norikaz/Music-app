@@ -33,6 +33,11 @@ export const Navigation = (props) => {
           </NavLink>
         </li>
         <li className="my-4 md:my-0">
+          <NavLink to="/search-song">
+            Search 
+          </NavLink>
+        </li>
+        <li className="my-4 md:my-0">
           <NavLink className="" to="/posts/new">
             News
           </NavLink>
