@@ -48,7 +48,7 @@ export const SongInfo = (props) => {
           </div>
 
           {/* displays the album information */}
-          <div className="xl:col-span-1 col-span-2 bg-gray-200 outline outline-2 outline-gray-300 max-h-[7.8rem] inline-flex my-4 rounded-xl items-center overflow-hidden ">
+          <div className="xl:col-span-1 col-span-2 bg-gray-200 outline outline-2 outline-gray-300 max-h-[7.8rem] inline-flex justify-end my-4 rounded-xl items-center overflow-hidden ">
             <div className="my-4 text-right text-l">
               <span className="text-xl font-semibold sm:text-2xl">
                 {props.albumName}
