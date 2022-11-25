@@ -10,22 +10,26 @@ import useAxiosFetchSpotify from "../components/hooks/useAxiosFetchSpotify";
 //https://www.figma.com/file/0BuMDTJLOjiYCjR997Lrif/muschart?node-id=34%3A230
 export const SongPage = (props) => {
   const [artistInfo, setArtistInfo] = useState(null);
-  const [userRating, setUserRating] = useState(0); // for allowing users to choose a rating score
+  const [userRating, setUserRating] = useState("N/A"); // for allowing users to choose a rating score
 
   const token = useContext(TokenContext);
   const { songInfo, setSongInfo } = useContext(SongInfoContext);
 
   const handleRatingIncrease = () => {
-    if (userRating < 10) {
+    if (userRating === "N/A") {
+      setUserRating(0);
+    } else if (userRating < 10) {
       setUserRating((prevRating) => prevRating + 0.5);
     }
-  }
+  };
 
   const handleRatingDecrease = () => {
-    if (userRating > 0) {
+    if (userRating === 0) {
+      setUserRating("N/A");
+    } else if (userRating > 0) {
       setUserRating((prevRating) => prevRating - 0.5);
     }
-  }
+  };
 
   //get artist information by artist id provided by songInfo
   const { isLoading, isError, data } = useAxiosFetchSpotify(
@@ -76,11 +80,11 @@ export const SongPage = (props) => {
                   (genre, i) =>
                     genre.charAt(0).toUpperCase() +
                     genre.slice(1) +
-                    (i + 1 === artistInfo.genres.length ? "." : ", ")
+                    (i + 1 === artistInfo.genres.length ? "" : ", ")
                 )
               : "N/A"
           }
-          userRating={userRating}
+          userRating={userRating === "N/A" ? userRating : userRating.toFixed(1)}
           handleRatingIncrease={handleRatingIncrease}
           handleRatingDecrease={handleRatingDecrease}
           id={
