@@ -10,9 +10,22 @@ import useAxiosFetchSpotify from "../components/hooks/useAxiosFetchSpotify";
 //https://www.figma.com/file/0BuMDTJLOjiYCjR997Lrif/muschart?node-id=34%3A230
 export const SongPage = (props) => {
   const [artistInfo, setArtistInfo] = useState(null);
+  const [userRating, setUserRating] = useState(0); // for allowing users to choose a rating score
 
   const token = useContext(TokenContext);
   const { songInfo, setSongInfo } = useContext(SongInfoContext);
+
+  const handleRatingIncrease = () => {
+    if (userRating < 10) {
+      setUserRating((prevRating) => prevRating + 0.5);
+    }
+  }
+
+  const handleRatingDecrease = () => {
+    if (userRating > 0) {
+      setUserRating((prevRating) => prevRating - 0.5);
+    }
+  }
 
   //get artist information by artist id provided by songInfo
   const { isLoading, isError, data } = useAxiosFetchSpotify(
@@ -67,6 +80,9 @@ export const SongPage = (props) => {
                 )
               : "N/A"
           }
+          userRating={userRating}
+          handleRatingIncrease={handleRatingIncrease}
+          handleRatingDecrease={handleRatingDecrease}
           id={
             songInfo
               ? "https://open.spotify.com/embed/track/" + songInfo.id
@@ -76,4 +92,4 @@ export const SongPage = (props) => {
       </div>
     </div>
   );
-};
+};;
