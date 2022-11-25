@@ -1,3 +1,4 @@
+// Displays information on average, user, and relevancy scores
 export const ScoreCard = (props) => {
   return (
     <div className="grid items-center grid-flow-col grid-cols-3 col-span-2 bg-gray-200 outline outline-2 outline-gray-300 rounded-xl">
