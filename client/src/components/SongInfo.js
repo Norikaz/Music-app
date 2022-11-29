@@ -1,5 +1,5 @@
 import React from "react";
-import { ScoreCard } from "./ScoreCard";
+import { ScoreCard } from "./UI/ScoreCard";
 import { Card } from "./UI/Card";
 
 //displays the song information on SearchSongPage
@@ -66,7 +66,7 @@ export const SongInfo = (props) => {
 
           {/*displays genre information */}
           <div className="grid grid-cols-1 grid-rows-3 md:col-span-1 col-span-2 bg-gray-200 outline outline-2 outline-gray-300 max-h-[9.4rem] p-4 rounded-xl overflow-hidden">
-            <div className="pb-2 text-xl font-semibold text-left border-2 border-b-gray-500 sm:text-2xl">
+            <div className="pb-2 text-xl font-semibold text-left border-2 sm:text-2xl border-b-gray-500 ">
               Genres
             </div>
             <div className="mt-2 ml-4 text-left text-l">{props.genres}</div>
