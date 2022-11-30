@@ -1,11 +1,10 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { ReviewCard } from "./UI/ReviewCard";
 import { ReviewInputBox } from "./UI/ReviewInputBox";
 
 export const ReviewContainer = (props) => {
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const [reviewsPerPage, setReviewsPerPage] = React.useState(10);
-  const pageRef = useRef(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [reviewsPerPage, setReviewsPerPage] = useState(10);
 
   // temporary for testing
   let reviewCards = [];
@@ -41,8 +40,6 @@ export const ReviewContainer = (props) => {
       ));
   };
 
-  //console.log(pageRef.current ? pageRef.current.childNodes.length : "");
-
   return (
     <div className="bg-gray-100 mx-auto my-6 rounded-xl max-w-[95%] w-30 p-16 font-inter">
       <h1 className="w-full mb-16 text-3xl font-semibold text-left sm:text-4xl">
@@ -50,10 +47,7 @@ export const ReviewContainer = (props) => {
       </h1>
       <ReviewInputBox />
       {displayReviews()}
-      <div
-        ref={pageRef}
-        className="inline-flex justify-center w-full overflow-scroll"
-      >
+      <div className="inline-flex justify-center w-full overflow-scroll">
         {displayPageNumbers()}
       </div>
     </div>

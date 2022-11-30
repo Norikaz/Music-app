@@ -1,23 +1,8 @@
-import { useRef, useLayoutEffect, useState } from "react";
+import { useState } from "react";
 
 export const ReviewCard = (props) => {
-  const [isOverflowing, setIsOverflowing] = useState(false);
-
-  const reviewCardRef = useRef(null);
-  const reviewTextRef = useRef(null);
-
-  /* console.log(
-    reviewCardRef.current ? reviewCardRef.current.clientHeight : null
-  );
-  console.log(
-    reviewTextRef.current ? reviewTextRef.current.clientHeight : null
-  );*/
-
   return (
-    <div
-      ref={reviewCardRef}
-      className="grid grid-cols-4 p-6 my-8 md:my-16 transition ease-in-out bg-gray-200 border-b-[5px] border-r-[5px] rounded-xl max-h-72 hover:-translate-y-1 hover:-translate-x-1 hover:border-red-600 hover:max-h-full"
-    >
+    <div className="grid grid-cols-4 p-6 my-8 md:my-16 transition ease-in-out bg-gray-200 border-b-[5px] border-r-[5px] rounded-xl max-h-72 hover:-translate-y-1 hover:-translate-x-1 hover:border-red-600 hover:max-h-full">
       {/*user info*/}
       <div className="flex flex-col max-h-full pr-6 font-semibold border-2 sm:justify-center border-r-gray-500 sm:text-2xl">
         <div className="flex justify-center animate-pulse">
@@ -43,10 +28,7 @@ export const ReviewCard = (props) => {
         <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t from-gray-200 to-transparent group-hover/text:invisible">
           <br />
         </div>
-        <p
-          ref={reviewTextRef}
-          className="ml-6 overflow-hidden text-sm break-words max-h-60 group-hover/text:max-h-full sm:text-lg"
-        >
+        <p className="ml-6 overflow-hidden text-sm break-words max-h-60 group-hover/text:max-h-full sm:text-lg">
           {" "}
           Lorem ipsum dolor sit
           ametmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm,
