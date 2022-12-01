@@ -25,7 +25,7 @@ function SignupPage() {
     e.preventDefault();
     let { email, password, firstName, lastName } = data;
     try {
-      auth.signup(email, password, firstName, lastName)
+      await auth.signup(email, password, firstName, lastName)
       navigate(from, {replace: true})
     } catch (error) {
       setError(true);

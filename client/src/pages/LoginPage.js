@@ -45,36 +45,6 @@ function LoginPage() {
     );
   }
 
-  // return (
-  //   <div className="col-10 col-md-8 col-lg-7">
-  //     <form onSubmit={login}>
-  //       <div className="form-row">
-  //         {errorMessage}
-  //         <input
-  //           type="email"
-  //           className="form-control"
-  //           name="email"
-  //           placeholder="Email"
-  //           value={data.email}
-  //           onChange={fieldChanged("email")}
-  //         />
-  //         <input
-  //           type="password"
-  //           className="form-control"
-  //           name="password"
-  //           placeholder="Password"
-  //           value={data.password}
-  //           onChange={fieldChanged("password")}
-  //         />
-  //         <button type="submit" className="bg-green-300 p-3 rounded-full inline-block">
-  //           Login
-  //         </button>
-  //       </div>
-  //     </form>
-  //     <Link className="bg-green-300 p-3 rounded-full inline-block" to="/signup" >Signup</Link>
-  //   </div>
-  // );
-
   return (
     <div className="p-16">
       <form onSubmit={login} className="flex flex-col justify-center items-center h-auto">
