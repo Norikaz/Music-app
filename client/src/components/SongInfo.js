@@ -2,10 +2,10 @@ import React from "react";
 import { ScoreCard } from "./UI/ScoreCard";
 import { Card } from "./UI/Card";
 
-//displays the song information on SearchSongPage
+//displays the song information on SongDetailsPage
 export const SongInfo = (props) => {
   return (
-    <div className="bg-gray-100 mx-auto my-6 rounded-xl max-w-[95%] w-30 p-16 font-inter">
+    <div className="bg-gray-100 mx-auto my-6 rounded-xl max-w-[95%] w-30 p-6 sm:p-16 font-inter">
       <h1 className="text-3xl font-semibold text-left sm:text-4xl">
         {props.songName}
       </h1>

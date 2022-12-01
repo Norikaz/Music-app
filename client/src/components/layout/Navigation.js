@@ -9,12 +9,12 @@ export const Navigation = (props) => {
   };
 
   return (
-    <nav className="bg-gray-300 p-6 md:flex md:items-center md:justify-between font-bold">
-      <div className="flex justify-between items-center">
+    <nav className="p-6 font-bold bg-gray-300 md:flex md:items-center md:justify-between">
+      <div className="flex items-center justify-between">
         <Link className="text-2xl" to="/">
           Music-App
         </Link>
-        <span className="text-3xl cursor-pointer md:hidden block mx-2">
+        <span className="block mx-2 text-3xl cursor-pointer md:hidden">
           <ion-icon
             name={isOpen ? "close" : "menu"}
             onClick={onClickMenuHandler}
@@ -28,21 +28,14 @@ export const Navigation = (props) => {
         }`}
       >
         <li className="my-4 md:my-0">
-          <NavLink to="/">
-            Home
-          </NavLink>
-        </li>
-        <li className="my-4 md:my-0">
-          <NavLink to="/search-song">
-            Search 
-          </NavLink>
+          <NavLink to="/">Home</NavLink>
         </li>
         <li className="my-4 md:my-0">
           <NavLink className="" to="/posts/new">
             News
           </NavLink>
         </li>
-        <li className="my-4 md:my-0 w-20">
+        <li className="w-20 my-4 md:my-0">
           <NavLink className="" to="/about-us">
             About us
           </NavLink>
@@ -52,7 +45,7 @@ export const Navigation = (props) => {
             Contact
           </NavLink>
         </li>
-        <li className="bg-blue-300 md:ml-20 p-3 rounded-full inline-block">
+        <li className="inline-block p-3 bg-blue-300 rounded-full md:ml-20">
           <button className="">Users</button>
         </li>
       </ul>
@@ -62,7 +55,7 @@ export const Navigation = (props) => {
 
 // export const Header = (props) => {
 //   return (
-//     <nav className="navbar navbar-expand-sm navbar-dark bg-dark shadow mb-3">
+//     <nav className="mb-3 shadow navbar navbar-expand-sm navbar-dark bg-dark">
 //       <div className="container-fluid">
 //         <Link className="navbar-brand" to="/">
 //           Music-App
