@@ -3,6 +3,7 @@ import { SongInfo } from "../components/SongInfo";
 import { SearchBar } from "../components/SearchBar";
 import { TokenContext } from "../components/context/TokenContext";
 import { SongInfoContext } from "../components/context/SongInfoContext";
+import { ReviewContainer } from "../components/ReviewContainer";
 import useAxiosFetchSpotify from "../components/hooks/useAxiosFetchSpotify";
 
 //this will be the song page that will display information about each song
@@ -50,7 +51,7 @@ export const SongPage = (props) => {
   }, [data]);
 
   return (
-    <div className="text-center mt-12">
+    <div className="mt-12 text-center">
       {/*This search bar is temporary until the search results page is ready*/}
       <SearchBar />
       <div>
@@ -94,6 +95,8 @@ export const SongPage = (props) => {
           }
         />
       </div>
+
+      <ReviewContainer />
     </div>
   );
 };;
