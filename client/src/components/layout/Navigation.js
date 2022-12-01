@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import AuthButton from "../AuthButton";
 
 export const Navigation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,8 +53,8 @@ export const Navigation = (props) => {
             Contact
           </NavLink>
         </li>
-        <li className="bg-blue-300 md:ml-20 p-3 rounded-full inline-block">
-          <button className="">Users</button>
+        <li>
+          <AuthButton/>
         </li>
       </ul>
     </nav>
