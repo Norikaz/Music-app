@@ -97,7 +97,7 @@ export const SearchBar = (props) => {
             id="dropdown"
             className={`${
               dropDownClicked ? "" : "hidden"
-            } z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 absolute top-14`}
+            } z-20 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 absolute top-14`}
             data-popper-reference-hidden=""
             data-popper-escaped=""
             data-popper-placement="top"
@@ -148,7 +148,7 @@ export const SearchBar = (props) => {
             <input
               type="search"
               id="search-dropdown"
-              className="h-12 block p-2.5 w-full z-20 text-md text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+              className="h-12 block p-2.5 w-full z-20 text-md text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-green-400 focus:border-green-400"
               placeholder={`Search by ${dropDownOption}`}
               value={songInput}
               onChange={(event) => setSongInput(event.target.value)}
@@ -156,7 +156,7 @@ export const SearchBar = (props) => {
             />
             <button
               type="submit"
-              className="absolute top-0 right-0 h-12 p-3 text-sm font-medium text-white bg-green-400 border border-green-400 rounded-r-lg hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="absolute top-0 right-0 h-12 p-3 text-sm font-medium text-white bg-green-400 border border-green-400 rounded-r-lg hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-300"
             >
               <svg
                 aria-hidden="true"
