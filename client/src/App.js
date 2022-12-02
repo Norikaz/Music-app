@@ -6,12 +6,15 @@ import { ShowPostPage } from "./pages/ShowPostPage";
 import { AboutUsPage } from "./pages/AboutUsPage";
 import { SongPage } from "./pages/SongDetailsPage";
 import { ContactPage } from "./pages/ContactPage";
+import  LoginPage  from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 import { Layout } from "./components/layout/Layout";
 import { HomePage } from "./pages/HomePage";
 import { SearchResultsPage } from "./pages/SearchResultListPage";
 import { TokenContext } from "./components/context/TokenContext";
 import { SongInfoContext } from "./components/context/SongInfoContext";
 import { SearchResultsContext } from "./components/context/SearchResultsContext";
+import { AuthProvider } from "./components/context/AuthContext";
 import axios from "axios";
 
 //get id and secret from https://developer.spotify.com/dashboard
@@ -49,37 +52,41 @@ export const App = () => {
     }, [CLIENT_ID, CLIENT_SECRET]);
 
     return (
-        <Layout>
-            <SongInfoContext.Provider value={songInfoProvider}>
-                <SearchResultsContext.Provider value={searchResultsProvider}>
-                    <TokenContext.Provider value={token}>
-                        <Routes>
-                            {/* displays a search bar and a carousel of 10 songs*/}
-                            <Route path="/" element={<HomePage />} />
-                            {/*displays the info and reviews on individual songs*/}
-                            <Route
-                                path="/song-details"
-                                element={<SongPage />}
-                            />
-                            {/* search results will be displayed as a list on this page */}
-                            <Route
-                                path="/search-song"
-                                element={<SearchResultsPage />}
-                            />
-                            <Route
-                                path="/posts/new"
-                                element={<PostFormPage />}
-                            />
-                            <Route
-                                path="/posts/:id"
-                                element={<ShowPostPage />}
-                            />
-                            <Route path="/about-us" element={<AboutUsPage />} />
-                            <Route path="/contact" element={<ContactPage />} />
-                        </Routes>
-                    </TokenContext.Provider>
-                </SearchResultsContext.Provider>
-            </SongInfoContext.Provider>
-        </Layout>
+        <AuthProvider>
+            <Layout>
+                <SongInfoContext.Provider value={songInfoProvider}>
+                    <SearchResultsContext.Provider value={searchResultsProvider}>
+                        <TokenContext.Provider value={token}>
+                            <Routes>
+                                {/* displays a search bar and a carousel of 10 songs*/}
+                                <Route path="/" element={<HomePage />} />
+                                {/*displays the info and reviews on individual songs*/}
+                                <Route
+                                    path="/song-details"
+                                    element={<SongPage />}
+                                />
+                                {/* search results will be displayed as a list on this page */}
+                                <Route
+                                    path="/search-song"
+                                    element={<SearchResultsPage />}
+                                />
+                                <Route
+                                    path="/posts/new"
+                                    element={<PostFormPage />}
+                                />
+                                <Route
+                                    path="/posts/:id"
+                                    element={<ShowPostPage />}
+                                />
+                                <Route path="/about-us" element={<AboutUsPage />} />
+                                <Route path="/contact" element={<ContactPage />} />
+                                <Route path="/login" element={ <LoginPage /> }/>
+                                <Route path="/signup" element= { <SignupPage /> } />
+                            </Routes>
+                        </TokenContext.Provider>
+                    </SearchResultsContext.Provider>
+                </SongInfoContext.Provider>
+            </Layout>
+        </AuthProvider>
     );
 };
