@@ -52,8 +52,6 @@ export const SongPage = (props) => {
 
   return (
     <div className="mt-12 text-center">
-      {/*This search bar is temporary until the search results page is ready*/}
-      <SearchBar />
       <div>
         <SongInfo
           songName={songInfo ? songInfo.name : "N/A"}
