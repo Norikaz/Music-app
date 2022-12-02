@@ -69,5 +69,41 @@ export const App = () => {
           </SearchResultsContext.Provider>
         </SongInfoContext.Provider>
       </Layout>
+        <AuthProvider>
+            <Layout>
+                <SongInfoContext.Provider value={songInfoProvider}>
+                    <SearchResultsContext.Provider value={searchResultsProvider}>
+                        <TokenContext.Provider value={token}>
+                            <Routes>
+                                {/* displays a search bar and a carousel of 10 songs*/}
+                                <Route path="/" element={<HomePage />} />
+                                {/*displays the info and reviews on individual songs*/}
+                                <Route
+                                    path="/song-details"
+                                    element={<SongPage />}
+                                />
+                                {/* search results will be displayed as a list on this page */}
+                                <Route
+                                    path="/search-song"
+                                    element={<SearchResultsPage />}
+                                />
+                                <Route
+                                    path="/posts/new"
+                                    element={<PostFormPage />}
+                                />
+                                <Route
+                                    path="/posts/:id"
+                                    element={<ShowPostPage />}
+                                />
+                                <Route path="/about-us" element={<AboutUsPage />} />
+                                <Route path="/contact" element={<ContactPage />} />
+                                <Route path="/login" element={ <LoginPage /> }/>
+                                <Route path="/signup" element= { <SignupPage /> } />
+                            </Routes>
+                        </TokenContext.Provider>
+                    </SearchResultsContext.Provider>
+                </SongInfoContext.Provider>
+            </Layout>
+        </AuthProvider>
     );
 };
