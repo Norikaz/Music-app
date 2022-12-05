@@ -3,24 +3,23 @@ import { useState } from "react";
 export const Paging = ({
   objectArray, // Array of objects to paginated
   itemsPerPage, // Number of items to display per page
-  pageStyling, // String of Tailwindcss styling to apply to the page
+  className, // String of Tailwindcss styling to apply to the page
   pageNumStyling, // String of Tailwindcss styling to apply to the page numbers
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPageState] = useState(itemsPerPage);
 
   // Separates the array of items into pages
   const displayItems = () => {
     return objectArray.slice(
-      (currentPage - 1) * itemsPerPageState,
-      (currentPage - 1) * itemsPerPageState + itemsPerPageState
+      (currentPage - 1) * itemsPerPage,
+      (currentPage - 1) * itemsPerPage + itemsPerPage
     );
   };
 
   // Displays and changes the page number
   const displayPageNumbers = () => {
     return objectArray
-      .slice(0, Math.ceil(objectArray.length / itemsPerPageState))
+      .slice(0, Math.ceil(objectArray.length / itemsPerPage))
       .map((item, i) => (
         <button
           onClick={() => {
@@ -37,9 +36,11 @@ export const Paging = ({
       ));
   };
 
+  console.log(itemsPerPage);
+
   return (
     <div>
-      <div className={pageStyling}>{displayItems()}</div>
+      <div className={className}>{displayItems()}</div>
       <div
         className={
           pageNumStyling

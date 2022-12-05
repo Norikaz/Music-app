@@ -33,6 +33,7 @@ export const SongCard = (props) => {
             {starSVG()}
           </h2>
           <h1>{props.artistName}</h1>
+          <h1 className="text-sm">{props.albumName}</h1>
         </div>
       </div>
       <div className="absolute bottom-0 left-0 invisible w-full h-full bg-green-400 group-hover/card:visible rounded-xl">
