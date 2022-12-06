@@ -1,32 +1,42 @@
-import React, { Fragment, useState, useEffect, useContext } from "react";
+import React, {
+  Fragment,
+  useState,
+  useImperativeHandle,
+  forwardRef,
+  useContext,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from "./UI/LoadingSpinner";
-import { TokenContext } from "./context/TokenContext";
-import { SearchResultsContext } from "./context/SearchResultsContext";
-import { SongInfoContext } from "./context/SongInfoContext";
+import { useInfoContext } from "./context/InfoContext";
 
 import axios from "axios";
 
-export const SearchBar = (props) => {
+export const SearchBar = forwardRef(({ limit = 10, offset = 0 }, ref) => {
+  const infoContext = useInfoContext();
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
   const [dropDownClicked, setDropDownClicked] = useState(false);
   const [dropDownOption, setDropDownOption] = useState("track");
-  const [songInput, setSongInput] = useState("");
-  const token = useContext(TokenContext);
-  const { searchResults, setSearchResults } = useContext(SearchResultsContext); //Stores 20 search results from Spotify API
-  const { songInfo, setSongInfo } = useContext(SongInfoContext);
+  const { searchTerm, setSearchTerm } = infoContext.searchTermProvider;
+  const { searchResults, setSearchResults } = infoContext.searchResultsProvider; //Stores 20 search results from Spotify API
+  const token = infoContext.token;
   const navigate = useNavigate();
   //const [spotifyArtistInfo, setSpotifyArtistInfo] = useState(null);
 
-  const spotifyCall = useEffect(() => {});
+  useImperativeHandle(ref, () => ({
+    fetchSongRef() {
+      fetchSong();
+    },
+  }));
 
   //get song through spotify search, default is 20 results
   //can set custom limit by appending &limit=n to end of query
   const fetchSong = () => {
     setIsLoading(true);
     axios(
-      `https://api.spotify.com/v1/search?q=${dropDownOption}:${songInput}&type=track&limit=50`,
+      `https://api.spotify.com/v1/search?q=${dropDownOption}:${
+        searchTerm ? searchTerm : searchTerm
+      }&type=track&limit=${limit}&offset=${offset}`,
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -35,7 +45,7 @@ export const SearchBar = (props) => {
       }
     )
       .then((response) => {
-        console.log(response);
+        console.log(offset);
         setSearchResults(response.data.tracks.items);
         setIsLoading(false);
         navigate("/search-results");
@@ -46,12 +56,9 @@ export const SearchBar = (props) => {
       });
   };
 
-  console.log(dropDownOption);
-  console.log(searchResults);
-
   const submitHandler = (event) => {
     event.preventDefault();
-    if (songInput.trim().length === 0) {
+    if (searchTerm.trim().length === 0) {
       return;
     }
 
@@ -150,8 +157,8 @@ export const SearchBar = (props) => {
               id="search-dropdown"
               className="h-12 block p-2.5 w-full z-20 text-md text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-green-400 focus:border-green-400"
               placeholder={`Search by ${dropDownOption}`}
-              value={songInput}
-              onChange={(event) => setSongInput(event.target.value)}
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
               required
             />
             <button
@@ -181,4 +188,4 @@ export const SearchBar = (props) => {
       {isLoading && <LoadingSpinner />}
     </Fragment>
   );
-};
+});

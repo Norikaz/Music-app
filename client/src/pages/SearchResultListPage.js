@@ -1,8 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { SearchBar } from "../components/SearchBar";
 import { SongCard } from "../components/UI/SongCard";
-import { SearchResultsContext } from "../components/context/SearchResultsContext";
-import { SongInfoContext } from "../components/context/SongInfoContext";
+import { useInfoContext } from "../components/context/InfoContext";
 import { Paging } from "../components/layout/Paging";
 import useGetWinWidth from "../components/hooks/useGetWinWidth";
 
@@ -10,10 +9,13 @@ import useGetWinWidth from "../components/hooks/useGetWinWidth";
 //when a search query is entered through the search bar
 //https://www.figma.com/file/0BuMDTJLOjiYCjR997Lrif/muschart?node-id=26%3A14
 export const SearchResultsPage = (props) => {
-  const { searchResults } = useContext(SearchResultsContext);
-  const { setSongInfo } = useContext(SongInfoContext);
+  const infoContext = useInfoContext();
+  const { searchResults } = infoContext.searchResultsProvider;
+  const { setSongInfo } = infoContext.songInfoProvider;
   const [resultsPerPage, setResultsPerPage] = useState(10);
+  const [searchOffset, setSearchOffset] = useState(0);
   const winWidth = useGetWinWidth();
+  const searchBarRef = useRef(null);
 
   useEffect(() => {
     if (winWidth > 768 && winWidth < 1280) {
@@ -36,16 +38,24 @@ export const SearchResultsPage = (props) => {
       ))
     : null;
 
-  console.log(resultsPerPage);
+  useEffect(() => {
+    console.log(searchOffset);
+    searchBarRef.current.fetchSongRef();
+  }, [searchOffset]);
 
   return (
     <div className="">
-      <SearchBar />
+      <SearchBar
+        ref={searchBarRef}
+        limit={resultsPerPage}
+        offset={searchOffset}
+      />
       <div>
         {results ? (
           <Paging
             objectArray={results}
             itemsPerPage={resultsPerPage}
+            offsetHandler={setSearchOffset}
             className="grid xl:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-6 grid-rows-10 mx-auto max-w-[95%] w-30 py-4 px-6 sm:px-16 font-inter"
           />
         ) : (

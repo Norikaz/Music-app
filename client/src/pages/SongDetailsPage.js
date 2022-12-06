@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { SongInfo } from "../components/SongInfo";
-import { SearchBar } from "../components/SearchBar";
-import { TokenContext } from "../components/context/TokenContext";
-import { SongInfoContext } from "../components/context/SongInfoContext";
+import { useInfoContext } from "../components/context/InfoContext";
 import { ReviewContainer } from "../components/ReviewContainer";
 import useAxiosFetchSpotify from "../components/hooks/useAxiosFetchSpotify";
 
@@ -13,8 +11,9 @@ export const SongPage = (props) => {
   const [artistInfo, setArtistInfo] = useState(null);
   const [userRating, setUserRating] = useState("N/A"); // for allowing users to choose a rating score
 
-  const token = useContext(TokenContext);
-  const { songInfo, setSongInfo } = useContext(SongInfoContext);
+  const infoContext = useInfoContext();
+  const token = infoContext.token;
+  const { songInfo } = infoContext.songInfoProvider;
 
   const handleRatingIncrease = () => {
     if (userRating === "N/A") {
