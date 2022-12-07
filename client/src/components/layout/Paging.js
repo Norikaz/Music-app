@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { navArrows } from "../UI/SVG";
+import { Tooltip } from "../UI/Tooltip";
 
 export const Paging = ({
   objectArray, // Array of objects to paginated
@@ -48,70 +49,105 @@ export const Paging = ({
     return (
       <div className="relative flex justify-around w-full">
         <div>
-          <button
-            onClick={() => {
-              if (offsetHandler) offsetHandler(0);
-              setCurrentPage(1);
-            }}
-          >
-            <span className="absolute -translate-y-2">hi</span>
-            <span className="relative mx-4">{navArrows.right_w_bar}</span>
-          </button>
-          <button
-            onClick={() => {
-              if (currentPage - 5 > 1) {
-                if (offsetHandler)
-                  offsetHandler((currentPage - 6) * itemsPerPage);
-                setCurrentPage(currentPage - 5);
-              } else {
+          <span className="inline-flex justify-center group/tt">
+            <Tooltip
+              content="Return to page 1"
+              className="transition ease-in-out opacity-0 group-hover/tt:opacity-100"
+            />
+            <button
+              onClick={() => {
                 if (offsetHandler) offsetHandler(0);
                 setCurrentPage(1);
-              }
-            }}
-          >
-            <span className="mx-4"> {navArrows.doubleLeft} </span>
-          </button>
-          <button
-            onClick={() => {
-              if (currentPage !== 1) {
-                if (offsetHandler)
-                  offsetHandler((currentPage - 2) * itemsPerPage);
-                setCurrentPage(currentPage - 1);
-              }
-            }}
-          >
-            <span className="mx-4">{navArrows.left}</span>
-          </button>
+              }}
+            >
+              <span className="relative mx-4 ">{navArrows.right_w_bar}</span>
+            </button>
+          </span>
+
+          <span className="inline-flex justify-center group/tt">
+            <Tooltip
+              className="transition ease-in-out opacity-0 group-hover/tt:opacity-100"
+              content="Go back 5 pages"
+            />
+            <button
+              onClick={() => {
+                if (currentPage - 5 > 1) {
+                  if (offsetHandler)
+                    offsetHandler((currentPage - 6) * itemsPerPage);
+                  setCurrentPage(currentPage - 5);
+                } else {
+                  if (offsetHandler) offsetHandler(0);
+                  setCurrentPage(1);
+                }
+              }}
+            >
+              <span className="mx-4"> {navArrows.doubleLeft} </span>
+            </button>
+          </span>
+
+          <span className="inline-flex justify-center group/tt">
+            <Tooltip
+              className="transition ease-in-out opacity-0 group-hover/tt:opacity-100"
+              content="Previous page"
+            />
+            <button
+              onClick={() => {
+                if (currentPage !== 1) {
+                  if (offsetHandler)
+                    offsetHandler((currentPage - 2) * itemsPerPage);
+                  setCurrentPage(currentPage - 1);
+                }
+              }}
+            >
+              <span className="mx-4">{navArrows.left}</span>
+            </button>
+          </span>
         </div>
+
         <span className="inline-flex items-center">{currentPage}</span>
+
         <div>
-          <button
-            onClick={() => {
-              if (
-                currentPage !== Math.ceil(objectArray.length / itemsPerPage) ||
-                offsetHandler
-              ) {
-                if (offsetHandler) offsetHandler(currentPage * itemsPerPage);
-                setCurrentPage(currentPage + 1);
-              }
-            }}
-          >
-            <span className="mx-4">{navArrows.right}</span>
-          </button>
-          <button
-            onClick={() => {
-              if (
-                offsetHandler ||
-                currentPage + 5 < Math.ceil(objectArray.length / itemsPerPage)
-              ) {
-                if (offsetHandler)
-                  offsetHandler(currentPage + 5 * itemsPerPage);
-                setCurrentPage(currentPage + 5);
-              }
-            }}
-          >
-            <span className="mx-4">{navArrows.doubleRight}</span>
-          </button>
+          <span className="inline-flex justify-center group/tt">
+            <Tooltip
+              className="transition ease-in-out opacity-0 group-hover/tt:opacity-100"
+              content="Next page"
+            />
+            <button
+              onClick={() => {
+                if (
+                  currentPage !==
+                    Math.ceil(objectArray.length / itemsPerPage) ||
+                  offsetHandler
+                ) {
+                  if (offsetHandler) offsetHandler(currentPage * itemsPerPage);
+                  setCurrentPage(currentPage + 1);
+                }
+              }}
+            >
+              <span className="mx-4">{navArrows.right}</span>
+            </button>
+          </span>
+
+          <span className="inline-flex justify-center group/tt">
+            <Tooltip
+              className="transition ease-in-out opacity-0 group-hover/tt:opacity-100"
+              content="Go forward 5 pages"
+            />
+            <button
+              onClick={() => {
+                if (
+                  offsetHandler ||
+                  currentPage + 5 < Math.ceil(objectArray.length / itemsPerPage)
+                ) {
+                  if (offsetHandler)
+                    offsetHandler(currentPage + 5 * itemsPerPage);
+                  setCurrentPage(currentPage + 5);
+                }
+              }}
+            >
+              <span className="mx-4">{navArrows.doubleRight}</span>
+            </button>
+          </span>
         </div>
       </div>
     );
@@ -126,7 +162,7 @@ export const Paging = ({
         className={
           pageNumStyling
             ? pageNumStyling
-            : `inline-flex justify-center w-full overflow-scroll my-10`
+            : `inline-flex justify-center w-full my-10`
         }
       >
         {displayNavArrows()}
