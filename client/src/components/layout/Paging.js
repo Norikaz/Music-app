@@ -23,27 +23,6 @@ export const Paging = ({
     return objectArray;
   };
 
-  /*
-  // Displays and changes the page number
-  const displayPageNumbers = () => {
-    return objectArray
-      .slice(0, Math.ceil(objectArray.length / itemsPerPage))
-      .map((item, i) => (
-        <button
-          onClick={() => {
-            setCurrentPage(i + 1);
-          }}
-        >
-          <span
-            id={i + 1}
-            className={`mx-2 ${i + 1 === currentPage ? "font-bold" : ""}`}
-          >
-            {i + 1}
-          </span>
-        </button>
-      ));
-  };*/
-
   //Displays 5 nav arrows to change the current page
   const displayNavArrows = () => {
     return (

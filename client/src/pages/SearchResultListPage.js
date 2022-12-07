@@ -15,7 +15,7 @@ export const SearchResultsPage = (props) => {
   const [resultsPerPage, setResultsPerPage] = useState(10);
   const [searchOffset, setSearchOffset] = useState(0);
   const winWidth = useGetWinWidth();
-  const searchBarRef = useRef(null);
+  const searchBarRef = useRef(null); // get the ref from the searchBar component
 
   useEffect(() => {
     if (winWidth > 768 && winWidth < 1280) {
@@ -38,8 +38,8 @@ export const SearchResultsPage = (props) => {
       ))
     : null;
 
+  // Used to update song list on page change
   useEffect(() => {
-    console.log(searchOffset);
     searchBarRef.current.fetchSongRef();
   }, [searchOffset]);
 

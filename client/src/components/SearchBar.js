@@ -3,7 +3,6 @@ import React, {
   useState,
   useImperativeHandle,
   forwardRef,
-  useContext,
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from "./UI/LoadingSpinner";
@@ -14,7 +13,6 @@ import axios from "axios";
 export const SearchBar = forwardRef(({ limit = 10, offset = 0 }, ref) => {
   const infoContext = useInfoContext();
   const [isLoading, setIsLoading] = useState(false);
-  const [isValid, setIsValid] = useState(true);
   const [dropDownClicked, setDropDownClicked] = useState(false);
   const [dropDownOption, setDropDownOption] = useState("track");
   const { searchTerm, setSearchTerm } = infoContext.searchTermProvider;
@@ -23,6 +21,7 @@ export const SearchBar = forwardRef(({ limit = 10, offset = 0 }, ref) => {
   const navigate = useNavigate();
   //const [spotifyArtistInfo, setSpotifyArtistInfo] = useState(null);
 
+  // Provide a way for parent components to update the search results
   useImperativeHandle(ref, () => ({
     fetchSongRef() {
       fetchSong();
