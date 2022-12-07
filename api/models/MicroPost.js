@@ -13,6 +13,14 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
+      rating: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 1,
+          max: 10,
+        },
+      },
     },
     {
       sequelize,
