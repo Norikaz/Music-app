@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { NavBarItem } from "../UI/NavBarItem";
 import AuthButton from "../AuthButton";
 
 export const Navigation = (props) => {
@@ -10,44 +11,40 @@ export const Navigation = (props) => {
   };
 
   return (
-    <nav className="p-6 font-bold bg-gray-300 md:flex md:items-center md:justify-between">
-      <div className="flex items-center justify-between">
-        <Link className="text-2xl" to="/">
-          Music-App
-        </Link>
-        <span className="block mx-2 text-3xl cursor-pointer md:hidden">
-          <ion-icon
-            name={isOpen ? "close" : "menu"}
-            onClick={onClickMenuHandler}
-          ></ion-icon>
+    <nav className="inline-flex items-center justify-between w-full font-bold bg-white md:flex drop-shadow">
+      <Link className="text-2xl" to="/">
+        <div className="p-4 transition ease-in-out hover:bg-green-300 w-min">
+          MusChart
+        </div>
+      </Link>
+
+      <span className="z-50 inline-flex items-center mx-2 text-3xl cursor-pointer md:hidden">
+        <span className="mr-6 text-sm">
+          <AuthButton />
         </span>
-      </div>
+        <ion-icon
+          name={isOpen ? "close" : "menu"}
+          onClick={onClickMenuHandler}
+        ></ion-icon>
+      </span>
 
       <ul
-        className={`md:container md:flex md:items-center md:gap-8 justify-end z[-1] md:z-auto md:static absolute bg-gray-300 w-full left-0 md:w-auto md:py-0 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500 ${
+        className={`md:container md:flex md:items-center bg-white w-full justify-end z-10 md:z-0 md:static absolute first-letter:w-full left-0 md:w-auto md:py-0 md:pl-0 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500 ${
           isOpen && `top-[80px] opacity-100`
         }`}
       >
-        <li className="my-4 md:my-0">
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li className="my-4 md:my-0">
-          <NavLink className="" to="/posts/new">
-            News
-          </NavLink>
-        </li>
-        <li className="w-20 my-4 md:my-0">
-          <NavLink className="" to="/about-us">
-            About us
-          </NavLink>
-        </li>
-        <li className="my-4 md:my-0">
-          <NavLink className="" to="/contact">
-            Contact
-          </NavLink>
-        </li>
-        <li>
-          <AuthButton/>
+        <NavLink to="/">
+          <NavBarItem text="Home" />
+        </NavLink>
+        <NavLink to="/posts">
+          <NavBarItem text="News" />
+        </NavLink>
+        <NavLink to="/about-us">
+          <NavBarItem text="About Us" />
+        </NavLink>
+
+        <li className="hidden py-5 mr-6 lg:block">
+          <AuthButton />
         </li>
       </ul>
     </nav>
