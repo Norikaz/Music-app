@@ -9,8 +9,9 @@ export const HomePage = (props) => {
 
     return (
       <div>
-        <h1 className="my-6 mb-6 text-4xl font-bold text-center">
-          Find Your Next Favorite Song!
+        <h1 className="my-6 mb-6 text-5xl font-bold leading-normal text-center sm:leading-normal sm:text-6xl">
+          Find Your Next
+          <br /> Favorite Song!
         </h1>
         <SearchBar />
         <Top10List />
