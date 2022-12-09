@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const passport = require('../middlewares/authentication')
-const { MicroPost } = db;
+const { Review } = db;
 
 // This is a simple example for providing basic CRUD routes for
 // a resource/model. It provides the following:
@@ -18,13 +18,13 @@ const { MicroPost } = db;
 //    /micro_posts comes from the file ./microPosts.js
 
 router.get("/", (req, res) => {
-  MicroPost.findAll({}).then((allPosts) => res.json(allPosts));
+  Review.findAll({}).then((allPosts) => res.json(allPosts));
 });
 
 router.post("/", passport.isAuthenticated(), (req, res) => {
-  let { content } = req.body;
+  let { content, rating } = req.body;
 
-  MicroPost.create({ content })
+  Review.create({ content, rating })
     .then((newPost) => {
       res.status(201).json(newPost);
     })
@@ -35,7 +35,7 @@ router.post("/", passport.isAuthenticated(), (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  MicroPost.findByPk(id).then((mpost) => {
+  Review.findByPk(id).then((mpost) => {
     if (!mpost) {
       return res.sendStatus(404);
     }
@@ -46,12 +46,12 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", passport.isAuthenticated(), (req, res) => {
   const { id } = req.params;
-  MicroPost.findByPk(id).then((mpost) => {
+  Review.findByPk(id).then((mpost) => {
     if (!mpost) {
       return res.sendStatus(404);
     }
 
-    mpost.content = req.body.content;
+    mpost.content = req.body.content; 
     mpost
       .save()
       .then((updatedPost) => {
@@ -65,7 +65,7 @@ router.put("/:id", passport.isAuthenticated(), (req, res) => {
 
 router.delete("/:id", passport.isAuthenticated(), (req, res) => {
   const { id } = req.params;
-  MicroPost.findByPk(id).then((mpost) => {
+  Review.findByPk(id).then((mpost) => {
     if (!mpost) {
       return res.sendStatus(404);
     }
