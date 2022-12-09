@@ -2,9 +2,9 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class MicroPost extends Model {}
+  class Review extends Model {}
 
-  MicroPost.init(
+  Review.init(
     {
       content: {
         type: DataTypes.STRING,
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       rating: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         validate: {
           min: 1,
           max: 10,
@@ -24,13 +24,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "MicroPost",
+      modelName: "Review",
     }
   );
 
-  MicroPost.associate = (models) => {
+  Review.associate = (models) => {
     // associations can be defined here
+    Review.belongsTo(models.Song);
+    Review.belongsTo(models.User);
   };
 
-  return MicroPost;
+  return Review;
 };
