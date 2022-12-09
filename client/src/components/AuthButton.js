@@ -22,11 +22,11 @@ const AuthButton = () => {
   };
 
   return (
-    <div className="text-green-800">
+    <div className="ml-6 text-green-800">
       {auth.user.firstName} {auth.user.lastName}
-      <button className={classes} onClick={logout}>
+      <span className={`${classes} cursor-pointer`} onClick={logout}>
         Logout
-      </button>
+      </span>
     </div>
   );
 };
