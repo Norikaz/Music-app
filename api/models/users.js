@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
 
     User.associate = (models) => {
         //associations can be defined here 
+        User.hasMany(models.Review)
     };
 
     // function will check if user provided password then hash it using bcrypt library and store that hash in passwordHash
