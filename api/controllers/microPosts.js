@@ -22,9 +22,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", passport.isAuthenticated(), (req, res) => {
-  let { content, rating } = req.body;
+  let { content } = req.body;
 
-  Review.create({ content, rating })
+  Review.create({ content })
     .then((newPost) => {
       res.status(201).json(newPost);
     })
@@ -52,6 +52,7 @@ router.put("/:id", passport.isAuthenticated(), (req, res) => {
     }
 
     mpost.content = req.body.content; 
+    
     mpost
       .save()
       .then((updatedPost) => {
