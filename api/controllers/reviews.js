@@ -2,29 +2,29 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const passport = require('../middlewares/authentication')
-const { MicroPost } = db;
+const { Review } = db;
 
 // This is a simple example for providing basic CRUD routes for
 // a resource/model. It provides the following:
-//    GET    /api/micro_posts
-//    POST   /api/micro_posts
-//    GET    /api/micro_posts/:id
-//    PUT    /api/micro_posts/:id
-//    DELETE /api/micro_posts/:id
+//    GET    /api/reviews
+//    POST   /api/reviews
+//    GET    /api/reviews/:id
+//    PUT    /api/reviews/:id
+//    DELETE /api/reviews/:id
 //
 // The full URL's for these routes are composed by combining the
 // prefixes used to load the controller files.
 //    /api comes from the file ../app.js
-//    /micro_posts comes from the file ./microPosts.js
+//    /reviews comes from the file ./api/controllers/index.js
 
 router.get("/", (req, res) => {
-  MicroPost.findAll({}).then((allPosts) => res.json(allPosts));
+  Review.findAll({}).then((allPosts) => res.json(allPosts));
 });
 
 router.post("/", passport.isAuthenticated(), (req, res) => {
   let { content } = req.body;
 
-  MicroPost.create({ content })
+  Review.create({ content })
     .then((newPost) => {
       res.status(201).json(newPost);
     })
@@ -35,7 +35,7 @@ router.post("/", passport.isAuthenticated(), (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  MicroPost.findByPk(id).then((mpost) => {
+  Review.findByPk(id).then((mpost) => {
     if (!mpost) {
       return res.sendStatus(404);
     }
@@ -46,12 +46,13 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", passport.isAuthenticated(), (req, res) => {
   const { id } = req.params;
-  MicroPost.findByPk(id).then((mpost) => {
+  Review.findByPk(id).then((mpost) => {
     if (!mpost) {
       return res.sendStatus(404);
     }
 
-    mpost.content = req.body.content;
+    mpost.content = req.body.content; 
+    
     mpost
       .save()
       .then((updatedPost) => {
@@ -65,7 +66,7 @@ router.put("/:id", passport.isAuthenticated(), (req, res) => {
 
 router.delete("/:id", passport.isAuthenticated(), (req, res) => {
   const { id } = req.params;
-  MicroPost.findByPk(id).then((mpost) => {
+  Review.findByPk(id).then((mpost) => {
     if (!mpost) {
       return res.sendStatus(404);
     }
