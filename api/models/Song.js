@@ -7,13 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       songName: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
-      content: {
+      artistName: {
         type: DataTypes.STRING,
-        validate: {
-          len: [3, 250],
-          notEmpty: true,
-        },
+        allowNull: false,
       },
     },
     {
