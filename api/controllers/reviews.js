@@ -15,7 +15,7 @@ const { Review } = db;
 // The full URL's for these routes are composed by combining the
 // prefixes used to load the controller files.
 //    /api comes from the file ../app.js
-//    /reviews comes from the file ./microPosts.js
+//    /reviews comes from the file ./api/controllers/index.js
 
 router.get("/", (req, res) => {
   Review.findAll({}).then((allPosts) => res.json(allPosts));

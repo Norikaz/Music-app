@@ -15,7 +15,7 @@ const { Rating } = db;
 // The full URL's for these routes are composed by combining the
 // prefixes used to load the controller files.
 //    /api comes from the file ../app.js
-//    /ratings comes from the file ./index.js
+//    /ratings comes from the file ./api/controllers/index.js
 
 router.get("/", (req, res) => {
   Rating.findAll({}).then((allPosts) => res.json(allPosts));
