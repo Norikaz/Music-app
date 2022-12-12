@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useInfoContext } from "./context/InfoContext";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Carousel } from "flowbite-react"
+import { Carousel } from "flowbite-react";
 
 export const Top10List = (props) => {
+  const infoContext = useInfoContext();
   const [playlistInfo, setPlaylistInfo] = useState("");
   const [cardArr, setCardArr] = useState([]);
-
-  const token = useInfoContext().token;
+  const navigate = useNavigate();
+  const token = infoContext.token;
+  const { setSongInfo } = infoContext.songInfoProvider;
 
   useEffect(() => {
     if (playlistInfo === "" && token) {
@@ -31,47 +34,54 @@ export const Top10List = (props) => {
 
   console.log(playlistInfo);
 
-    function Card(props) {
-        return (
-            <div className="w-1/4 m-auto lg:w-1/5 m-auto" >
-                <h1 className="font-semibold text-xl text-left">
-                    { props.index + 1 }
-                </h1>
-                <img
-                    src={
-                        props.playlistInfo
-                            ? props.playlistInfo.items[props.index].track.album
-                                  .images[0].url
-                            : ""
-                    }
-                    className="lg: w-72 h-68 m-auto rounded-full"
-                    alt=""
-                ></img>
-                <h1 className="font-semibold text-xl text-center">
-                    {props.playlistInfo
-                        ? props.playlistInfo.items[props.index].track.name
-                        : "N/A"}
-                </h1>
-                <h1 className="font-semibold text-xl text-center ">
-                    {props.playlistInfo
-                        ? props.playlistInfo.items[props.index].track.artists[0]
-                              .name
-                        : "N/A"}
-                </h1>
-            </div>
-        );
-    }
+  function Card(props) {
+    const handleClick = () => {
+      setSongInfo(props.playlistInfo.items[props.index].track);
+      navigate("/song-details");
+    };
 
     return (
-        <div className="bg-gray-400 m-auto rounded-xl max-w-[95%] text-xl font-inter ">
-            <p className="p-3 mx-10 inline-block">Top Rated Songs</p>
-            <hr className="mx-8 border-black"/>
-            {/* imported from flowbite */}
-                <Carousel slide={false} className="p-10">
-                    {cardArr}
-                </Carousel>
-
+      <div className="h-[32rem] cursor-pointer" onClick={handleClick}>
+        <div className="absolute w-[90%] h-[100%] text-white bg-gradient-to-r from-black to-transparent">
+          <h1 className="mt-8 ml-8 text-4xl font-semibold text-left">
+            {props.index + 1}
+          </h1>
+          <h1 className="ml-8 text-2xl font-semibold text-left">
+            {props.playlistInfo
+              ? props.playlistInfo.items[props.index].track.name
+              : "N/A"}
+          </h1>
+          <h1 className="ml-8 text-xl font-semibold text-left">
+            {props.playlistInfo
+              ? props.playlistInfo.items[props.index].track.artists[0].name
+              : "N/A"}
+          </h1>
         </div>
- 
+        <img
+          src={
+            props.playlistInfo
+              ? props.playlistInfo.items[props.index].track.album.images[0].url
+              : ""
+          }
+          className="z-[-1] absolute w-[100%] -translate-y-1/4"
+          alt=""
+        ></img>
+      </div>
     );
+  }
+
+  return (
+    <div>
+      <p className="inline-block p-3 mx-10 text-xl font-inter ">
+        Trending Songs
+      </p>
+      <hr className="mx-8 mb-4 border-black" />
+      <div className="bg-gray-400 m-auto rounded-2xl max-w-[95%] mb-12">
+        {/* imported from flowbite */}
+        <Carousel slideInterval={10000} className="">
+          {cardArr}
+        </Carousel>
+      </div>
+    </div>
+  );
 };
