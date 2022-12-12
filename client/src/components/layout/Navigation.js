@@ -36,9 +36,9 @@ export const Navigation = (props) => {
         <NavLink to="/">
           <NavBarItem text="Home" />
         </NavLink>
-        <NavLink to="/posts">
+        <a href="https://github.com/Soto-J/music-app" target="_blank">
           <NavBarItem text="News" />
-        </NavLink>
+        </a>
         <NavLink to="/about-us">
           <NavBarItem text="About Us" />
         </NavLink>
